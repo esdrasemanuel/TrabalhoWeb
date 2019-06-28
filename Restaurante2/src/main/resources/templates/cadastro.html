@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Cadastro</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+	<header class="header">
+		<img src="/img/logo.png" width="300px">
+	</header>
+
+	<nav class="menu">
+		<ul>
+			<li><a href="/index">Página Inicial</a></li>
+			<li><a href="/pessoa/cadastro">Cadastrar</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN')"><a href="/adm/cadprato">Add
+					Prato</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/meuspedidos">Meus pedidos</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/carrinho">Carrinho</a></li>
+			<li sec:authorize="!hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logar">Login</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<h2>Faça seu Cadastro</h2>
+
+	<form action="/pessoa/cadastrar" method="POST"
+		enctype="multipart/form-data" th:object="${usuario}">
+		<input type="hidden" th:field="*{codigo}">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				Nome: <input type="text" th:field="*{nome}">
+			</div>
+
+			<div class="form-group col-md-6">
+				Data de Nascimento: <input type="text" th:field="*{dataNascimento}">
+			</div>
+			<div class="form-group col-md-6">
+				Endereco: <input type="text" th:field="*{endereco}">
+			</div>
+
+			<div class="form-group col-md-6">
+				CPF: <input type="text" th:field="*{Cpf}">
+			</div>
+
+			<div class="form-group col-md-6">
+				Email: <input type="text" th:field="*{email}">
+			</div>
+
+			<div class="form-group col-md-6">
+				Senha: <input type="password" th:field="*{senha}">
+			</div>
+
+		</div>
+		<input type="submit" value="Cadastrar">
+	</form>
+
+
+
+
+	<footer> (88) 9-9798-5874 - 1997 - by Esdras Emanuel</footer>
+
+</body>
+</html>

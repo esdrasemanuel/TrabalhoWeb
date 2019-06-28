@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Restaurant</title>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+
+	<header class="header">
+		<img src="/img/logo.png" width="300px">
+	</header>
+
+	<nav class="menu">
+		<ul>
+			<li><a href="/index">Página Inicial</a></li>
+			<li><a href="/pessoa/cadastro">Cadastrar</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN')"><a href="/adm/cadprato">Add
+					Prato</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/meuspedidos">Meus pedidos</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/carrinho">Carrinho</a></li>
+			<li sec:authorize="!hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logar">Login</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="pessoa/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<h2 class="titulo">Cadastrar Pratos</h2>
+
+
+	<form action="/adm/addprato" method="POST"
+		enctype="multipart/form-data" th:object="${prato}">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<input type="hidden" th:field="*{codigo}"> <label
+					for="exampleInputEmail1">Nome do Prato</label> <input type="text"
+					th:field="*{nome}" class="form-control">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="exampleInputEmail1">Preço</label> <input type="text"
+					th:field="*{preco}" class="form-control">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="exampleInputEmail1">Descrição</label> <input type="text"
+					th:field="*{descricao}" class="form-control">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="exampleInputEmail1">Foto</label> <input type="file"
+					name="imagem"> 
+
+			</div>
+			<input type="submit"
+					value="Cadastrar">
+		</div>
+
+	</form>
+
+	
+	<footer> (88) 9-9798-5874 - 1997 - by Esdras Emanuel</footer>
+
+
+</body>

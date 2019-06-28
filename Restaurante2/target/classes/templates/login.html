@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Login</title>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+
+	<header class="header">
+		<img src="/img/logo.png" width="300px">
+	</header>
+
+	<nav class="menu">
+		<ul>
+			<li><a href="/index">Página Inicial</a></li>
+			<li><a href="/pessoa/cadastro">Cadastrar</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN')"><a href="/adm/cadprato">Add
+					Prato</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/meuspedidos">Meus pedidos</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/carrinho">Carrinho</a></li>
+			<li sec:authorize="!hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logar">Login</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="pessoa/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<form method="POST">
+		<div class="form-group col-md-6">
+		<label for="exampleInputEmail1">Email address</label>
+		<input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
+		</div>
+	<div class="form-group col-md-6">
+    	<label for="exampleInputPassword1">Password</label>
+		<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
+	</div>
+	<div class="form-group col-md-6">
+		<input type="submit" class="btn btn-primary"
+			value="Logar">
+	</div>
+
+	</form>
+	
+	
+	
+
+
+
+	<footer> (88) 9-9798-5874 - 1997 - by Esdras Emanuel</footer>
+
+
+</body>
+</html>

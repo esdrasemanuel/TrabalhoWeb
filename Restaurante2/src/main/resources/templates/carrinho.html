@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Restaurant</title>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+
+	<header class="header">
+		<img src="/img/logo.png" width="300px">
+	</header>
+
+	<nav class="menu">
+		<ul>
+			<li><a href="/index">Página Inicial</a></li>
+			<li><a href="/pessoa/cadastro">Cadastrar</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN')"><a href="/adm/cadprato">Add
+					Prato</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/meuspedidos">Meus pedidos</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/carrinho">Carrinho</a></li>
+			<li sec:authorize="!hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logar">Login</a></li>
+			<li sec:authorize="hasAnyRole('ADMIN','USER')"><a
+				href="/pessoa/logout">Logout</a></li>
+		</ul>
+	</nav>
+
+	<h2 class="titulo">Itens do seu carrinho de compras</h2>
+
+
+<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Nome</th>
+				<th scope="col">Preço</th>
+				<th scope="col">Foto</th>
+				<th scope="col">Quantidade</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr th:each="prato : ${listaDePratos}">
+					<td th:text="${prato.nome}"></td>
+					<td th:text="${prato.preco}"></td>
+					<td><img width="200" height="200" th:src="@{'/images/'+${prato.nome}+.png}"></td>
+					<td><input type="number" id="qtd" style="width:50px" value="1"></td>
+					<td><a class="btn btn-danger" th:href="@{/pessoa/rmvDoCarrinho/{codigo}(codigo = ${prato.codigo})}">Excluir</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><div class="form-group col-md-2">
+							<a th:text="${total}"> </a> 
+						</div></td>
+					</tr>
+				</tbody>
+		</table>
+		
+		<form th:action="@{/pessoa/comprar}">
+			<button type="submit" name="action" class="btn btn-danger">FINALIZAR</button>
+		</form>
+	
+
+	<footer> (88) 9-9798-5874 - 1997 - by Esdras Emanuel</footer>
+
+
+</body>
+</html>
